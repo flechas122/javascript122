@@ -1,70 +1,81 @@
-var num1 = 0;
-var num2 = 0;
-var opera;
+var Calculadora = (function(){
+
+  //Declaracion de variables
 
 
-document.getElementById("on").onclick = function() {
-  document.getElementById("display").textContent = "0";
+  var operación1, operación2, pantalla = "0";
+
+  var teclas;
+
+  var boton  = {
+    on              : 'on',
+    cambio          : 'sign',
+    division        : 'dividido',
+    multiplicacion  : 'por',
+    resta           : 'menos',
+    punto           : 'punto',
+    igual           : 'igual',
+    suma            : 'mas'
+  };
+
+  var extracion = function(){
+    teclas = document.getElementsByClassName('tecla');
+  }
+
+
+//funciones que proyectan la pantalla y eventos de las operaciones
+
+var eventos = {
+  click: function(e){
+    switch (this.id) {
+      case boton.on  :
+        break;
+      case boton.cambio :
+        break;
+      case boton.division  :
+        break;
+      case boton.multiplicacion  :
+        break;
+      case boton.resta  :
+        break;
+      case boton.punto:
+        break;
+      case boton.igual:
+        break;
+      case boton.suma :
+
+      default:
+        pantallayLimite(this.id);
+    }
+  }
 }
 
-/*
-document.getElementById("7").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "7";
-}
 
-document.getElementById("7").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "7";
-}
-*/
+  var subscribcion = function(){
+    for(var i = 0, len = teclas.length; i < len; i++) {
+        teclas[i].onclick = eventos.click;
+    }
+  }
 
-/*
-document.getElementById("7").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "7";
-}
-*/
+  function pantallayLimite(id){
+    if (pantalla.length == 9) return;
+    if (pantalla == "0") pantalla = "";
+    pantalla = pantalla + id;
+    document.getElementById('display').innerHTML = pantalla;
+  }
 
-document.getElementById("7").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "7";
-}
-document.getElementById("8").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "8";
-}
-document.getElementById("9").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "9";
-}
 
-/*
-document.getElementById("7").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "7";
-}
-*/
+//arrancadores
 
-document.getElementById("4").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "4";
-}
-document.getElementById("5").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "5";
-}
-document.getElementById("6").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "6";
-}
-/*
-document.getElementById("7").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "7";
-}
-*/
-document.getElementById("1").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "1";
-}
-document.getElementById("2").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "2";
-}
-document.getElementById("3").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "3";
-}
+  var iniciar1 = function(){
+    extracion();
+    subscribcion();
+  }
 
-/*
-document.getElementById("7").onclick = function() {
-  document.getElementById("display").textContent = display.textContent + "7";
-}
-*/
+  return{
+      init: iniciar1
+  }
+
+})(document);
+
+Calculadora.init();
